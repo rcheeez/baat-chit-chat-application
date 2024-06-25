@@ -30,7 +30,7 @@ BaatChit is a private web chat application built using React and Firebase. It al
 
 ## Live Link
 
-Visit BaatChit live: [Your Live Application URL](https://your-live-app-url.com)
+Visit BaatChit live: [Your Live Application URL](https://baatchit-app.vercel.app/)
 
 ## Acknowledgments
 
