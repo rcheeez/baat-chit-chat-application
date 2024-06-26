@@ -134,9 +134,8 @@ export default function ChatRoom() {
         });
 
         showNotification('New Message', `${displayName} in ${roomName}: ${formValue}`);
+        setFormValue('');
       }
-
-      setFormValue('');
     } catch (error) {
       console.error('Error sending message: ', error);
     }
