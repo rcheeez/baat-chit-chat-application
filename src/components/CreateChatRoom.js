@@ -25,6 +25,7 @@ export default function CreateChatRoom() {
         try {
             const roomId = generateRoomId();
             const roomRef = await collection(firestore, 'chatRooms');
+
             await addDoc(roomRef,{
                 roomId: roomId,
                 name: roomName,
@@ -56,7 +57,7 @@ export default function CreateChatRoom() {
             <h1>Create your own Chat Room!</h1>
             <form className='chat-room-form' onSubmit={handleCreateRoom}>
                 <input type='text' className='room-name' value={roomName} placeholder='Enter Room Name' onChange={(e) => setRoomName(e.target.value)} />
-                <button type='submit' className='room-btn'>Create Room</button>
+                <button type='submit' disabled={roomName.length === 0} className='room-btn'>Create Room</button>
             </form>
             <Link to={'/all-chats'} style={{color: 'black', textAlign:'center', paddingTop: '3%'}}>Your Chat Rooms</Link>
         </div>
