@@ -147,7 +147,7 @@ export default function ChatRoom() {
         <p>
         <Link to={'/all-chats'}>&#10094;</Link> &nbsp; &nbsp; &nbsp;
           {roomName}</p>
-        <button onClick={deleteHandlePopup} className='chat-room-delete'>Delete Room</button>
+        <button onClick={deleteHandlePopup} className='chat-room-delete'>Delete</button>
         <SignOut />
       </div>
       {isRoomOwner && <PendingApproval roomId={roomId} />}
