@@ -84,7 +84,7 @@ pipeline {
 
         stage('Apply Services and Secrets') {
             steps {
-                withKubeConfig(clusterName: 'ag-cluster', contextName: '', credentialsId: 'git-token', namespace: 'chat-app', restrictKubeConfigAccess: false, serverUrl: 'https://127.0.0.1:37423') {
+                withKubeConfig(clusterName: 'ag-cluster', contextName: '', credentialsId: 'k8s-token', namespace: 'chat-app', restrictKubeConfigAccess: false, serverUrl: 'https://127.0.0.1:37423') {
                     sh 'kubectl apply -f k8s/service.yml'
                     sh 'kubectl apply -f k8s/secret.yml'
                 }
@@ -93,7 +93,7 @@ pipeline {
 
         stage('Verify Deployment & Services') {
             steps {
-                withKubeConfig(clusterName: 'ag-cluster', contextName: '', credentialsId: 'git-token', namespace: 'chat-app', restrictKubeConfigAccess: false, serverUrl: 'https://127.0.0.1:37423') {
+                withKubeConfig(clusterName: 'ag-cluster', contextName: '', credentialsId: 'k8s-token', namespace: 'chat-app', restrictKubeConfigAccess: false, serverUrl: 'https://127.0.0.1:37423') {
                     sh 'kubectl get all -n ${K8S_NAMESPACE}'
                 }
             }
@@ -101,7 +101,7 @@ pipeline {
 
         stage('Port-Forward to Run the Application Live') {
             steps {
-                withKubeConfig(clusterName: 'ag-cluster', contextName: '', credentialsId: 'git-token', namespace: 'chat-app', restrictKubeConfigAccess: false, serverUrl: 'https://127.0.0.1:37423') {
+                withKubeConfig(clusterName: 'ag-cluster', contextName: '', credentialsId: 'k8s-token', namespace: 'chat-app', restrictKubeConfigAccess: false, serverUrl: 'https://127.0.0.1:37423') {
                     sh 'kubectl port-forward svc/baatchit-app-svc 3000:80 --address=0.0.0.0 -n ${K8S_NAMESPACE} &'
             }
         }
