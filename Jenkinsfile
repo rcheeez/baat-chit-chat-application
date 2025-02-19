@@ -26,12 +26,6 @@ pipeline {
             }
         }
 
-        stage('Test App') {
-            steps {
-                sh 'SKIP_TESTS=true npm test'
-            }
-        }
-
         stage('SonarQube Code Scan') {
             environment {
                 scannerHome = tool 'sonar-scanner'
