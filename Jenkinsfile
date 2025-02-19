@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                checkout scm
+                sh 'git clone https://github.com/rcheeez/baatchit-app.git'
             }
         }
 
