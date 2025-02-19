@@ -1,0 +1,70 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: baatchit-app
+  namespace: chat-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: chat-app
+  template:
+    metadata:
+      labels:
+        app: chat-app
+    spec:
+      containers:
+      - name: baatchit-app
+        image: baatchit-app:1.0
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: production
+        - name: REACT_APP_FIREBASE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: firebase-secrets
+              key: REACT_APP_FIREBASE_API_KEY
+        - name: REACT_APP_FIREBASE_AUTH_DOMAIN
+          valueFrom:
+            secretKeyRef:
+              name: firebase-secrets
+              key: REACT_APP_FIREBASE_AUTH_DOMAIN
+        - name: REACT_APP_FIREBASE_PROJECT_ID
+          valueFrom:
+            secretKeyRef:
+              name: firebase-secrets
+              key: REACT_APP_FIREBASE_PROJECT_ID
+        - name: REACT_APP_FIREBASE_STORAGE_BUCKET
+          valueFrom:
+            secretKeyRef:
+              name: firebase-secrets
+              key: REACT_APP_FIREBASE_STORAGE_BUCKET
+        - name: REACT_APP_FIREBASE_MESSAGING_SENDER_ID
+          valueFrom:
+            secretKeyRef:
+              name: firebase-secrets
+              key: REACT_APP_FIREBASE_MESSAGING_SENDER_ID
+        - name: REACT_APP_FIREBASE_APP_ID
+          valueFrom:
+            secretKeyRef:
+              name: firebase-secrets
+              key: REACT_APP_FIREBASE_APP_ID
+        - name: REACT_APP_FIREBASE_MEASUREMENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: firebase-secrets
+              key: REACT_APP_FIREBASE_MEASUREMENT_ID
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 20
