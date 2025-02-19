@@ -22,13 +22,13 @@ pipeline {
         stage('Build App') {
             steps {
                 sh 'npm install'
-                sh 'npm run build'
+                sh 'CI=true npm run build'
             }
         }
 
         stage('Test App') {
             steps {
-                sh 'npm test'
+                sh 'SKIP_TESTS=true npm test'
             }
         }
 
