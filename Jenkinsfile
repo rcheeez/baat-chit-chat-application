@@ -66,7 +66,7 @@ pipeline {
         stage('Docker Push to Docker Hub') {
             steps {
                 script {
-                    withDockerRegistry(toolName: 'docker', url: 'https://index.docker.io/v1/', 'docker-credentials') {
+                    withDockerRegistry(toolName: 'docker', url: 'https://index.docker.io/v1/', credentialsId: 'docker-credentials') {
                         sh 'docker push ${DOCKER_IMAGE}:${DOCKER_TAG}'
                     }
                 }
@@ -103,6 +103,7 @@ pipeline {
             steps {
                 withKubeConfig(clusterName: 'ag-cluster', contextName: '', credentialsId: 'k8s-token', namespace: 'chat-app', restrictKubeConfigAccess: false, serverUrl: 'https://127.0.0.1:37423') {
                     sh 'kubectl port-forward svc/baatchit-app-svc 3000:80 --address=0.0.0.0 -n ${K8S_NAMESPACE} &'
+                }
             }
         }
     }
