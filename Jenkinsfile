@@ -9,7 +9,7 @@ pipeline {
 
     tools {
         nodejs "NodeJS" // Assuming you have a NodeJS tool configured in Jenkins
-        dockerTool "Docker" // Assuming you have a Docker tool configured in Jenkins
+        dockerTool "docker" // Assuming you have a Docker tool configured in Jenkins
     }
 
     stages {
