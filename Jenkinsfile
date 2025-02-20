@@ -37,7 +37,7 @@ pipeline {
                         -Dsonar.projectName=baatchit-app \
                         -Dsonar.projectVersion=1.0 \
                         -Dsonar.sources=.\
-                        -Dsonar.exclusions= node_modules/**,coverage/** \
+                        -Dsonar.exclusions=node_modules/**,coverage/** \
                         -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
                     '''
                 }
