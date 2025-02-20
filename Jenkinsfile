@@ -28,10 +28,10 @@ pipeline {
 
         stage('SonarQube Code Scan') {
             environment {
-                scannerHome = tool 'sonar-scanner'
+                scannerHome = tool 'sonarqube'
             }
             steps {
-                withSonarQubeEnv('sonarqube') {
+                withSonarQubeEnv('sonar-scanner') {
                     sh '''${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=baatchit-app \
                         -Dsonar.projectName=baatchit-app \
