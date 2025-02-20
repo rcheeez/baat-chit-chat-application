@@ -5,7 +5,7 @@ set -e  # Exit immediately if a command exits with a non-zero status
 # Update package list and install Docker
 echo "Updating package list and installing Docker..."
 sudo apt update
-sudo apt install -y docker.io
+sudo apt install docker.io -y
 sudo chmod 666 /var/run/docker.sock
 
 # Install Jenkins
