@@ -1,29 +1,29 @@
-# Use an official Node.js runtime as a parent image
-FROM node:14-alpine AS build
+# Use a lightweight Node.js image
+FROM node:18-bullseye-slim AS build
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy only package.json & package-lock.json to leverage Docker caching
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies efficiently
+RUN npm ci --only=production
 
-# Copy the rest of the application code
-COPY . .
+# Copy the rest of the application
+COPY . . 
 
-# Build the application
+# Build the React application
 RUN npm run build
 
-# Use a lightweight web server to serve the built application
-FROM nginx:alpine
+# Use Caddy instead of Nginx (faster & auto-configures)
+FROM caddy:2.7.6-alpine
 
-# Copy the built application from the build stage
-COPY --from=build /app/build /usr/share/nginx/html
+# Copy built React app to the web server directory
+COPY --from=build /app/build /srv
 
-# Expose the port the app runs on
+# Expose port
 EXPOSE 80
 
-# Start the web server
-CMD ["nginx", "-g", "daemon off;"]
+# Start Caddy server
+CMD ["caddy", "file-server", "--root", "/srv"]
