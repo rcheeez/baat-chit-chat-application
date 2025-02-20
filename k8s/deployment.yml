@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: baatchit-app
-        image: baatchit-app:1.0
+        image: baatchit-app:latest
         ports:
         - containerPort: 3000
         env:
