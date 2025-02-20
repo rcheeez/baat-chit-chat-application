@@ -14,8 +14,8 @@ spec:
         app: chat-app
     spec:
       containers:
-      - name: guravarchies/baatchit-app
-        image: baatchit-app:latest
+      - name: baatchit-app
+        image: guravarchies/baatchit-app:latest
         ports:
         - containerPort: 3000
         env:
