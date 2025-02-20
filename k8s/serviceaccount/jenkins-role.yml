@@ -5,5 +5,20 @@ metadata:
   namespace: chat-app
 rules:
 - apiGroups: ["", "apps", "batch", "extensions", "autoscaling", "rbac.authorization.k8s.io", "policy"]
-  resources: ["pods", "secrets", "services", "deployments", "replicasets", "jobs", "cronjobs", "roles", "rolebindings", "endpoints", "statefulsets", "daemonsets", "serviceaccounts"]
+  resources:
+    - "pods"
+    - "secrets"
+    - "services"
+    - "deployments"
+    - "replicasets"
+    - "jobs"
+    - "cronjobs"
+    - "roles"
+    - "rolebindings"
+    - "endpoints"
+    - "statefulsets"
+    - "daemonsets"
+    - "serviceaccounts"
+    - "replicationcontrollers" 
+    - "horizontalpodautoscalers" 
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
