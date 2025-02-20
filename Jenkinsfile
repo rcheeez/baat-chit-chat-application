@@ -44,13 +44,6 @@ pipeline {
             }
         }
 
-        stage('Security & Dependency Scanning') {
-            steps {
-                sh 'npm audit --audit-level=critical || true'
-                sh 'trivy image ${DOCKER_IMAGE}:${DOCKER_TAG}'
-            }
-        }
-
         stage('Docker Build & Tag') {
             steps {
                 script {
@@ -66,6 +59,13 @@ pipeline {
                         sh 'docker push ${DOCKER_IMAGE}:${DOCKER_TAG}'
                     }
                 }
+            }
+        }
+
+        stage('Security & Dependency Scanning') {
+            steps {
+                sh 'npm audit --audit-level=critical || true'
+                sh 'trivy image ${DOCKER_IMAGE}:${DOCKER_TAG}'
             }
         }
 
