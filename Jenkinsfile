@@ -47,7 +47,7 @@ pipeline {
         stage('Docker Build & Tag') {
             steps {
                 script {
-                    sh 'sudo docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
+                    sh 'docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
                 }
             }
         }
@@ -56,7 +56,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(url: 'https://index.docker.io/v1/', credentialsId: 'docker-credentials') {
-                        sh 'sudo docker push ${DOCKER_IMAGE}:${DOCKER_TAG}'
+                        sh 'docker push ${DOCKER_IMAGE}:${DOCKER_TAG}'
                     }
                 }
             }
