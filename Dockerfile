@@ -23,7 +23,7 @@ FROM caddy:2.7.6-alpine
 COPY --from=build /app/build /srv
 
 # Expose port
-EXPOSE 80
+EXPOSE 3000
 
 # Start Caddy server
-CMD ["caddy", "file-server", "--root", "/srv"]
+CMD ["caddy", "file-server", "--root", "/srv", "--listen", ":3000"]
