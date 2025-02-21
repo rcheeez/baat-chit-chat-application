@@ -19,8 +19,6 @@ spec:
         ports:
         - containerPort: 3000
         env:
-        - name: NODE_ENV
-          value: production
         - name: REACT_APP_FIREBASE_API_KEY
           valueFrom:
             secretKeyRef:
