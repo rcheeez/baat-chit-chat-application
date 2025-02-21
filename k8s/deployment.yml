@@ -18,42 +18,9 @@ spec:
         image: guravarchies/baatchit-app:latest
         ports:
         - containerPort: 3000
-        env:
-        - name: REACT_APP_FIREBASE_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: firebase-secrets
-              key: REACT_APP_FIREBASE_API_KEY
-        - name: REACT_APP_FIREBASE_AUTH_DOMAIN
-          valueFrom:
-            secretKeyRef:
-              name: firebase-secrets
-              key: REACT_APP_FIREBASE_AUTH_DOMAIN
-        - name: REACT_APP_FIREBASE_PROJECT_ID
-          valueFrom:
-            secretKeyRef:
-              name: firebase-secrets
-              key: REACT_APP_FIREBASE_PROJECT_ID
-        - name: REACT_APP_FIREBASE_STORAGE_BUCKET
-          valueFrom:
-            secretKeyRef:
-              name: firebase-secrets
-              key: REACT_APP_FIREBASE_STORAGE_BUCKET
-        - name: REACT_APP_FIREBASE_MESSAGING_SENDER_ID
-          valueFrom:
-            secretKeyRef:
-              name: firebase-secrets
-              key: REACT_APP_FIREBASE_MESSAGING_SENDER_ID
-        - name: REACT_APP_FIREBASE_APP_ID
-          valueFrom:
-            secretKeyRef:
-              name: firebase-secrets
-              key: REACT_APP_FIREBASE_APP_ID
-        - name: REACT_APP_FIREBASE_MEASUREMENT_ID
-          valueFrom:
-            secretKeyRef:
-              name: firebase-secrets
-              key: REACT_APP_FIREBASE_MEASUREMENT_ID
+        envFrom:
+        - secretRef:
+            name: firebase-secrets
         readinessProbe:
           httpGet:
             path: /
